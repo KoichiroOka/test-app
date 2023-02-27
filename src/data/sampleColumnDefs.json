@@ -1,0 +1,79 @@
+[
+  {
+    "column_id": "236909",
+    "name": "record_key",
+    "property": "LITERAL",
+    "type": "TEXT",
+    "visible": true
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "column_id": "236970",
+            "name": "X11",
+            "property": "LITERAL",
+            "type": "NUM1",
+            "unit": "[-]",
+            "visible": false
+          }
+        ],
+        "group_id": "1-1",
+        "name": "X10"
+      }
+    ],
+    "group_id": "1-0",
+    "name": "X00"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "column_id": "236971",
+            "name": "A12",
+            "property": "LITERAL",
+            "type": "TEXT",
+            "unit": "[-]",
+            "visible": true
+          }
+        ],
+        "group_id": "2-1",
+        "name": "A10"
+      },
+      {
+        "column_id": "236972",
+        "name": "A20",
+        "property": "LITERAL",
+        "type": "TEXT",
+        "unit": "[kg]",
+        "visible": true
+      }
+    ],
+    "group_id": "2-0",
+    "name": "A00"
+  },
+  {
+    "column_id": "236973",
+    "name": "B00",
+    "property": "LITERAL",
+    "type": "TEXT",
+    "unit": "[-]",
+    "visible": true
+  },
+  {
+    "column_id": "237013",
+    "name": "g",
+    "property": "LITERAL",
+    "type": "NUM1",
+    "visible": true
+  },
+  {
+    "column_id": "236990",
+    "name": "a",
+    "property": "CONCATE",
+    "type": "TEXT",
+    "visible": true
+  }
+]
