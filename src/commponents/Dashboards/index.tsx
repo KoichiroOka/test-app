@@ -21,22 +21,40 @@ export const Dashboards = () => {
 
   useEffect(() => {
     getAgColumnDef("692");
-    getAgRowData("692");
+    // getAgRowData("692");
   }, []);
 
+  const onTest = () => {
+    getAgRowData("692");
+  };
+
   return (
-    <div className="ag-theme-alpine">
-      {loading ? (
-        <>loading</>
-      ) : (
-        <AgGridReact
-          rowData={agRowData}
-          columnDefs={agColumnDef}
-          defaultColDef={defaultColDef}
-          rowSelection={"multiple"}
-          pinnedTopRowData={[pinnedUnitData]}
-        ></AgGridReact>
-      )}
-    </div>
+    <>
+      <button onClick={onTest}>test</button>
+      <div className="ag-theme-alpine">
+        {loading ? (
+          <>loading</>
+        ) : (
+          // <AgGridReact
+          //   rowData={agRowData}
+          //   columnDefs={agColumnDef}
+          //   defaultColDef={defaultColDef}
+          //   rowSelection={"multiple"}
+          //   pinnedTopRowData={[pinnedUnitData]}
+          // ></AgGridReact>
+          <>
+            <ul>
+              {agRowData.map((obj, index) => {
+                return (
+                  <li key={index}>
+                    <p>{index}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        )}
+      </div>
+    </>
   );
 };

@@ -12,8 +12,11 @@ import {
   Whoops404,
 } from "./page";
 import { Logo } from "./commponents/Logo";
+import { useTest } from "./hooks/useTest";
+import { useCallback } from "react";
 
 function App() {
+  const { getAgRowData } = useTest();
   const element = useRoutes([
     { path: "/", element: <Home /> },
     {
@@ -36,9 +39,9 @@ function App() {
     { path: "contact", element: <Contact /> },
     { path: "*", element: <Whoops404 /> },
   ]);
-  const onTest = () => {
-    console.log(process.env.PUBLIC_URL);
-  };
+  const onTest = useCallback(() => {
+    getAgRowData();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">

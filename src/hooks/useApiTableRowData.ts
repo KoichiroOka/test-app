@@ -2,36 +2,59 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { TableRowData } from "../types/api/tableRowData";
 
-type Obj = {
-  [prop: string]: any;
-};
+interface Obj {
+  [key: string]: any;
+}
 
 export const useApiTableRowData = () => {
   const [agRowData, setAgRowData] = useState<Obj[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const getAgRowData = useCallback((tableId: string) => {
+  const getAgRowData = useCallback(async (tableId: string) => {
     console.log("List Row-Data: ", tableId);
+
+    let pageNum = 1;
+    setAgRowData([]);
     setLoading(true);
-    axios
-      .get<TableRowData[]>("xxx")
-      .then(async (res) => {
+
+    while (pageNum > 0) {
+      try {
+        const res = await axios.get<TableRowData[]>(`xxx`, {
+          params: {
+            field_mask: "cells",
+            user_id: "J0134484",
+            page: pageNum,
+          },
+        });
+
+        console.log(pageNum, res.headers["link"]);
+
+        const nextLink = res.headers["link"];
+
+        if (typeof nextLink === "undefined") {
+          pageNum = 0;
+        } else {
+          pageNum++;
+        }
+
         const data = res.data.map((props: TableRowData) => {
           let data: Obj = {};
-          props.row.map((props) => {
+          props.cells.map((props) => {
             data[props.column_id] = props.value;
           });
           return data;
         });
-        console.log("this is", data);
-        setAgRowData(data);
-      })
-      .catch((err) => {
-        setAgRowData([]);
-        console.log("err");
-      })
-      .finally(() => setLoading(false));
+
+        setAgRowData((prev) => [...prev, ...data]);
+        console.log(agRowData);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        pageNum > 0 || setLoading(false);
+      }
+    }
   }, []);
+
   return {
     getAgRowData,
     agRowData,

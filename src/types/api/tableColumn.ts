@@ -4,7 +4,7 @@ export interface TableColumn {
   type?: string;
   unit?: string;
   property?: string;
-  visible?: boolean;
+  hidden: boolean;
 }
 
 export interface TableColumnGroup {
