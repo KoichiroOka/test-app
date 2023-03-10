@@ -19,13 +19,16 @@ export const useApiTableRowData = () => {
 
     while (pageNum > 0) {
       try {
-        const res = await axios.get<TableRowData[]>(`xxx`, {
-          params: {
-            field_mask: "cells",
-            user_id: "J0134484",
-            page: pageNum,
-          },
-        });
+        const res = await axios.get<TableRowData[]>(
+          `http://hgaap02t.a.rd.honda.co.jp:7041/vbdb2-webservice/api/v2/tables/${tableId}/rows`,
+          {
+            params: {
+              field_mask: "cells",
+              user_id: "J0134484",
+              page: pageNum,
+            },
+          }
+        );
 
         console.log(pageNum, res.headers["link"]);
 

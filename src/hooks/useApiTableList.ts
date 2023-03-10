@@ -12,7 +12,9 @@ export const useApiTableList = () => {
     console.log("List Group-Items: ", groupId);
     setLoading(true);
     axios
-      .get<Table[]>("xxx")
+      .get<Table[]>(
+        `http://hgaap02t.a.rd.honda.co.jp:7041/vbdb2-webservice/api/v2/groups/${groupId}`
+      )
       .then(async (res) => {
         const data: TableTree = {
           groupId: groupId,

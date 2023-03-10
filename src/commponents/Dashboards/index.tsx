@@ -1,6 +1,6 @@
-import { ColDef } from "ag-grid-community";
+import { ColDef, ColGroupDef } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTargetTable } from "../../contexts/DataGridProvider";
 import { useApiTableColumnDef } from "../../hooks/useApiTableColumnDef";
 import { useApiTableRowData } from "../../hooks/useApiTableRowData";
@@ -27,6 +27,801 @@ export const Dashboards = () => {
   const onTest = () => {
     getAgRowData("692");
   };
+
+  const [columnDefs, setColumnDefs] = useState<(ColDef | ColGroupDef)[]>([
+    {
+      headerName: "FRM機種ID",
+      field: "3922",
+      hide: false,
+      headerCheckboxSelection: true,
+      checkboxSelection: true,
+      showDisabledCheckboxes: true,
+      pinned: "left",
+      lockPinned: true,
+      cellClass: "lock-pinned",
+    },
+    {
+      headerName: "類別",
+      field: "153401",
+      hide: true,
+    },
+    {
+      headerName: "E/F",
+      field: "153402",
+      hide: true,
+    },
+    {
+      headerName: "仕向地",
+      field: "153403",
+      hide: true,
+    },
+    {
+      headerName: "派生コード",
+      field: "153404",
+      hide: true,
+    },
+    {
+      headerName: "イベント",
+      field: "153405",
+      hide: true,
+    },
+    {
+      headerName: "フロー",
+      field: "153406",
+      hide: true,
+    },
+    {
+      headerName: "ENG機種ID",
+      field: "3926",
+      hide: true,
+    },
+    {
+      headerName: "DPM(Data Proto Model)",
+      groupId: "1-0",
+      children: [
+        {
+          headerName: "ファイル名",
+          field: "3927",
+          hide: false,
+        },
+      ],
+    },
+    {
+      headerName: "シート下収納_容量",
+      groupId: "2-0",
+      children: [
+        {
+          headerName: "図面",
+          field: "3928",
+          hide: true,
+        },
+      ],
+    },
+    {
+      headerName: "乗車定員",
+      groupId: "3-0",
+      children: [
+        {
+          headerName: "運転者_乗員サイズ",
+          groupId: "3-1",
+          children: [
+            {
+              headerName: "呼び",
+              field: "3929",
+              hide: false,
+            },
+          ],
+        },
+        {
+          headerName: "運転者_体重",
+          groupId: "3-2",
+          children: [
+            {
+              headerName: "※ライダ",
+              field: "3930",
+              hide: false,
+            },
+          ],
+        },
+        {
+          headerName: "運転者_体重_中間処理",
+          groupId: "3-3",
+          children: [
+            {
+              headerName: "※ライダ",
+              field: "190266",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_乗員サイズ",
+          groupId: "3-4",
+          children: [
+            {
+              headerName: "呼び",
+              field: "153407",
+              hide: false,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_体重",
+          groupId: "3-5",
+          children: [
+            {
+              headerName: "※パッセンジャ",
+              field: "153408",
+              hide: false,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_体重_中間処理_空白",
+          groupId: "3-6",
+          children: [
+            {
+              headerName: "※パッセンジャ",
+              field: "190267",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_体重_中間処理_*",
+          groupId: "3-7",
+          children: [
+            {
+              headerName: "※パッセンジャ",
+              field: "190268",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_体重_中間処理_*1",
+          groupId: "3-8",
+          children: [
+            {
+              headerName: "※パッセンジャ",
+              field: "190270",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "パッセンジャ_体重_中間処理",
+          groupId: "3-9",
+          children: [
+            {
+              headerName: "※パッセンジャ",
+              field: "190269",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "乗車定員質量",
+          groupId: "3-10",
+          children: [
+            {
+              headerName: "(2名の時の合計：中間処理)",
+              field: "153409",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "規定乗車定員",
+          field: "3931",
+          hide: false,
+        },
+        {
+          headerName: "乗車定員質量",
+          field: "153410",
+          hide: false,
+        },
+        {
+          headerName: "乗車定員質量",
+          groupId: "3-11",
+          children: [
+            {
+              headerName: "直接合計入力",
+              field: "153411",
+              hide: false,
+            },
+            {
+              headerName: "個別選択由来(中間処理)",
+              field: "190271",
+              hide: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "積載質量",
+      groupId: "4-0",
+      children: [
+        {
+          headerName: "標準",
+          field: "3932",
+          hide: false,
+        },
+        {
+          headerName: "用品",
+          field: "3933",
+          hide: false,
+        },
+      ],
+    },
+    {
+      headerName: "完成車積載条件",
+      groupId: "5-0",
+      children: [
+        {
+          headerName: "その1",
+          groupId: "5-1",
+          children: [
+            {
+              headerName: "用品部品名称",
+              field: "3934",
+              hide: true,
+            },
+            {
+              headerName: "用品質量",
+              field: "3935",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "その2",
+          groupId: "5-2",
+          children: [
+            {
+              headerName: "用品部品名称",
+              field: "3936",
+              hide: true,
+            },
+            {
+              headerName: "用品質量",
+              field: "3937",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "その3",
+          groupId: "5-3",
+          children: [
+            {
+              headerName: "用品部品名称",
+              field: "3938",
+              hide: true,
+            },
+            {
+              headerName: "用品質量",
+              field: "3939",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "その4",
+          groupId: "5-4",
+          children: [
+            {
+              headerName: "用品部品名称",
+              field: "3940",
+              hide: true,
+            },
+            {
+              headerName: "用品質量",
+              field: "3941",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "その5",
+          groupId: "5-5",
+          children: [
+            {
+              headerName: "用品部品名称",
+              field: "3942",
+              hide: true,
+            },
+            {
+              headerName: "用品質量",
+              field: "3943",
+              hide: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_整備質量(Curb Mass)",
+      groupId: "6-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "6-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3974",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3944",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3945",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187767",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189858",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3946",
+              hide: false,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "6-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3975",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3976",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3977",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_乾燥質量(Dry Mass)",
+      groupId: "7-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "7-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3978",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3947",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3948",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187768",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189859",
+              hide: true,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3949",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "7-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3979",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3980",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3981",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_完全乾燥質量",
+      groupId: "8-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "8-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3982",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3950",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3951",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187769",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189860",
+              hide: true,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3952",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "8-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3983",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3984",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3985",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_最大積載時質量",
+      groupId: "9-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "9-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3986",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3953",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3954",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187770",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189861",
+              hide: true,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3955",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "9-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3987",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3988",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3989",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_整備一名質量",
+      groupId: "10-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "10-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3990",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3956",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3957",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187771",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189862",
+              hide: true,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3958",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "10-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3991",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3992",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3993",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "完成車_整備二名質量",
+      groupId: "11-0",
+      children: [
+        {
+          headerName: "設計値",
+          groupId: "11-1",
+          children: [
+            {
+              headerName: "合計",
+              field: "3994",
+              hide: false,
+            },
+            {
+              headerName: "FR分担",
+              field: "3959",
+              hide: false,
+            },
+            {
+              headerName: "RR分担",
+              field: "3960",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担",
+              field: "187772",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担(中間処理2)",
+              field: "189863",
+              hide: true,
+            },
+            {
+              headerName: "サイドカー分担(中間処理1)",
+              field: "3961",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "配分",
+          groupId: "11-2",
+          children: [
+            {
+              headerName: "FR分担比率",
+              field: "3995",
+              hide: false,
+            },
+            {
+              headerName: "RR分担比率",
+              field: "3996",
+              hide: false,
+            },
+            {
+              headerName: "サイドカー分担比率",
+              field: "3997",
+              hide: false,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      headerName: "定格総軸荷重(Gross Axle Weight Rating)",
+      groupId: "12-0",
+      children: [
+        {
+          headerName: "FR",
+          field: "3962",
+          hide: false,
+        },
+        {
+          headerName: "RR",
+          field: "3963",
+          hide: false,
+        },
+      ],
+    },
+    {
+      headerName: "完成車_グロス質量(Gross Vehicle Weight Rating)",
+      field: "3964",
+      hide: false,
+    },
+    {
+      headerName: "車両総質量(Loaded Mass)",
+      groupId: "13-0",
+      children: [
+        {
+          headerName: "FR",
+          field: "3965",
+          hide: false,
+        },
+        {
+          headerName: "RR",
+          field: "3966",
+          hide: false,
+        },
+      ],
+    },
+    {
+      headerName: "完成車_最大許容荷重(MAXimum Weight Capacity)",
+      field: "3967",
+      hide: false,
+    },
+    {
+      headerName: "完成車_MWC質量",
+      groupId: "14-0",
+      children: [
+        {
+          headerName: "図面",
+          field: "3968",
+          hide: true,
+        },
+      ],
+    },
+    {
+      headerName: "設計部品_質量",
+      groupId: "15-0",
+      children: [
+        {
+          headerName: "車体",
+          groupId: "15-1",
+          children: [
+            {
+              headerName: "完成車設計分",
+              field: "3969",
+              hide: true,
+            },
+            {
+              headerName: "吸気排気燃料系設計分",
+              field: "3970",
+              hide: true,
+            },
+            {
+              headerName: "合計",
+              field: "3971",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "足回り",
+          groupId: "15-2",
+          children: [
+            {
+              headerName: "合計",
+              field: "3972",
+              hide: true,
+            },
+          ],
+        },
+        {
+          headerName: "電装(車体分)",
+          groupId: "15-3",
+          children: [
+            {
+              headerName: "合計",
+              field: "3973",
+              hide: true,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 
   return (
     <>

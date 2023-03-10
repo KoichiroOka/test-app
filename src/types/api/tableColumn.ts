@@ -1,9 +1,9 @@
 export interface TableColumn {
   column_id: string;
   name: string;
-  type?: string;
-  unit?: string;
-  property?: string;
+  type: string;
+  unit: string;
+  property: string;
   hidden: boolean;
 }
 

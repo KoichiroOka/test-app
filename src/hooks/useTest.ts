@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { TableRowData } from "../types/api/tableRowData";
+import Data from "../data/sampleColumnDefs.json";
 
 export const useTest = () => {
   // const [nextPage, setNextPage] = useState(0);
@@ -19,19 +20,8 @@ export const useTest = () => {
           }
         )
         .then(async (res) => {
-          const nextLink = res.headers["link"];
-          const nextPage: string =
-            typeof nextLink === "undefined"
-              ? "finished"
-              : nextLink.match(/(page=)\d+/)[0].match(/\d+/g)[0];
-          console.log(
-            "page = ",
-            pageNum + 1,
-            "link: ",
-            res.headers["link"],
-            "nextPage: ",
-            nextPage
-          );
+          const data = Data;
+          console.log(data);
         })
         .catch((err) => {
           console.log(err);
